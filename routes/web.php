@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,20 +21,22 @@ Route::get('/', function () {
 
 // **** SESSION ****
 
-Route::prefix('/session')->name('session.')->controller(SessionController::class)->group(function (){
+Route::resource('session', \App\Http\Controllers\SessionController::class)->middleware('auth');
+
+// Route::prefix('/session')->name('session.')->controller(SessionController::class)->group(function (){
     
-    Route::get('/index', 'index')->name('index');
-    Route::get('/{session}/show', 'show')->name('show');
+//     Route::get('/', 'index')->name('index');
+//     Route::get('/{session}/show', 'show')->name('show');
 
-    Route::get('/create', 'create')->name('create');
-    Route::post('/store', 'store');
+//     Route::get('/new', 'create')->name('create');
+//     Route::post('/new', 'store');
 
-    Route::get('/{session}/edit', 'edit')->name('edit');
-    Route::post('/{session}/update', 'update');
+//     Route::get('/{session}/edit', 'edit')->name('edit');
+//     Route::post('/{session}/update', 'update');
 
-    Route::post('/{session}/delete', 'destroy')->name('delete');
+//     Route::post('/{session}/delete', 'destroy')->name('delete');
 
-});
+// });
 
 // **** AUTH ****
 

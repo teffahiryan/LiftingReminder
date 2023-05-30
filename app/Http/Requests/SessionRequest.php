@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class SessionRequest extends FormRequest
 {
@@ -24,7 +25,15 @@ class SessionRequest extends FormRequest
         return [
             'name' => ['required', 'min:2'],
             'description' => ['required'],
-            'image' => ['image', 'max:2000']
+            'image' => ['image', 'max:2000'],
+            'user_id' => ['required']
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => $this->input('user_id') ?: Auth::id()
+        ]);
     }
 }

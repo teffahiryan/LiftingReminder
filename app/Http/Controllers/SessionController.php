@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SessionRequest;
 use App\Models\Session;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
@@ -29,7 +30,11 @@ class SessionController extends Controller
 
         $session = new Session();
 
-        return view('session.create', [
+        if($user = Auth::id()){
+            $session->user_id = $user;
+        }
+
+        return view('session.form', [
             'session' => $session
         ]);
     }
@@ -41,7 +46,7 @@ class SessionController extends Controller
     {
         Session::create($request->validated());
 
-        return redirect()->route('session.index')->with('success', 'Votre séance a bien été créé');
+        return to_route('session.index')->with('success', 'Le bien a bien été créé');
     }
 
     /**
@@ -59,7 +64,7 @@ class SessionController extends Controller
      */
     public function edit(Session $session)
     {
-        return view('session.edit', [
+        return view('session.form', [
             'session' => $session
         ]);
     }
