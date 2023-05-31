@@ -11,7 +11,7 @@ class ExerciseRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class ExerciseRequest extends FormRequest
         return [
             'name' => ['required', 'min:2'],
             'description' => ['required'],
-            'repition' => ['required', 'integer'],
+            'repetition' => ['required', 'integer'],
             'set' => ['required', 'integer']
         ];
     }

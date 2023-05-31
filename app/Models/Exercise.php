@@ -13,6 +13,6 @@ class Exercise extends Model
         'name',
         'description',
         'repetition',
-        'step'
+        'set'
     ];
 }

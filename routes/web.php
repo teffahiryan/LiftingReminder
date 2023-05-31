@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
@@ -19,30 +20,37 @@ Route::get('/', function () {
     return view('index');
 });
 
-// **** SESSION ****
+// **** USER ****
 
-Route::resource('session', \App\Http\Controllers\SessionController::class)->middleware('auth');
+Route::get('/tableau-de-bord', [MainController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+Route::post('/tableau-de-bord', [MainController::class, 'store'])->middleware('auth');
 
-// Route::prefix('/session')->name('session.')->controller(SessionController::class)->group(function (){
-    
-//     Route::get('/', 'index')->name('index');
-//     Route::get('/{session}/show', 'show')->name('show');
+// **** USER SESSION ****
 
-//     Route::get('/new', 'create')->name('create');
-//     Route::post('/new', 'store');
+Route::middleware('auth')->controller(\App\Http\Controllers\SessionController::class)->name('user.session.')->group(function () {
+    Route::get('/{session}/seance', 'show')->name('show');
+    Route::post('/create/seance', 'store')->name('store');
+    Route::post('{session}/edit', 'update')->name('update');
+});
 
-//     Route::get('/{session}/edit', 'edit')->name('edit');
-//     Route::post('/{session}/update', 'update');
+// **** USER EXERCISE ****
 
-//     Route::post('/{session}/delete', 'destroy')->name('delete');
+Route::middleware('auth')->controller(\App\Http\Controllers\ExerciseController::class)->name('user.exercise.')->group(function () {
+    Route::get('/{exercice}/exercice', 'show')->name('show');
+    Route::post('/create/exercice', 'store')->name('store');
+    Route::post('{exercice}/edit', 'update')->name('update');
+});
 
-// });
+// **** ADMIN SESSION/EXERCISE ****
+
+Route::resource('session', \App\Http\Controllers\Admin\SessionController::class)->middleware('auth');
+Route::resource('exercise', \App\Http\Controllers\Admin\ExerciseController::class)->middleware('auth');
 
 // **** AUTH ****
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
