@@ -21,10 +21,14 @@
                     <td> {{$session->name}} </td>
                     <td> {{$session->description}} </td>
                     <td> # </td>
-                    <td>
+                    <td class="d-flex gap-2">
                         <a href="{{route('session.show', $session)}}" class="btn btn-primary">Voir</a>
                         <a href="{{route('session.edit', $session)}}" class="btn btn-primary">Modifier</a>
-                        <a href="{{route('session.destroy', $session)}}" class="btn btn-primary">Supprimer</a>
+                        <form action="{{route('session.destroy', $session)}}" method="post">
+                            @csrf
+                            @method("delete")
+                            <button class="btn btn-danger">Supprimer</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

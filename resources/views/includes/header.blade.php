@@ -6,8 +6,11 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav d-flex justify-content-between w-100 mx-3">
+
         <li class="nav-item">
+          @auth
           <a class="nav-link active" aria-current="page" href="{{route('dashboard')}}">Tableau de bord</a>
+          @endauth
         </li>
 
         @auth

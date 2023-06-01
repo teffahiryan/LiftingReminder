@@ -14,8 +14,6 @@
 
                 @include('shared.input', ['class' => 'col', 'label' => 'Nom', 'name' => 'name', 'value' => $exercise->name])
                 @include('shared.input', ['type'=> 'textarea', 'class' => 'col', 'name' => 'description', 'value' => $exercise->description])
-                @include('shared.input', ['class' => 'col', 'label' => 'Série', 'name' => 'set', 'value' => $exercise->name])
-                @include('shared.input', ['class' => 'col', 'label' => 'Répétition', 'name' => 'repetition', 'value' => $exercise->name])
 
                 <div>
                     <button class="btn btn-primary">

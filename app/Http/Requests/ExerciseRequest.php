@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ExerciseRequest extends FormRequest
@@ -24,8 +25,19 @@ class ExerciseRequest extends FormRequest
         return [
             'name' => ['required', 'min:2'],
             'description' => ['required'],
-            'repetition' => ['required', 'integer'],
-            'set' => ['required', 'integer']
+            'repetition' => ['integer'],
+            'set' => ['integer'],
+            'image' => ['image', 'max:2000'],
+            'user_id' => ['required']
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => $this->input('user_id') ?: Auth::id(),
+            'repetition' => 0,
+            'set' => 0
+        ]);
     }
 }

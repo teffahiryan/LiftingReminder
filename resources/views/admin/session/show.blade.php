@@ -1,5 +1,5 @@
 @extends('base')
-@yield('title', 'Séance')
+@section('title', 'Séance')
 @section('content')
     <h1> Séance {{$session->name}} </h1>
     <ul class="list-group">

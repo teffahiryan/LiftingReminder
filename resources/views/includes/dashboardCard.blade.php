@@ -1,5 +1,7 @@
 <div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
+    @if ($item->image)
+        <img src="{{$item->imageUrl()}}" class="card-img-top" alt="{{$item->name}}"> 
+    @endif
     <div class="card-body">
         <h5 class="card-title">{{$item->name}}</h5>
         <p class="card-text">{{$item->description}}</p>

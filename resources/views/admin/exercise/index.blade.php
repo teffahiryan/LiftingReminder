@@ -23,10 +23,14 @@
                     <td> {{$exercise->description}} </td>
                     <td> {{$exercise->set}} </td>
                     <td> {{$exercise->repetition}} </td>
-                    <td>
+                    <td class="d-flex gap-2">
                         <a href="{{route('exercise.show', $exercise)}}" class="btn btn-primary">Voir</a>
                         <a href="{{route('exercise.edit', $exercise)}}" class="btn btn-primary">Modifier</a>
-                        <a href="{{route('exercise.destroy', $exercise)}}" class="btn btn-primary">Supprimer</a>
+                        <form action="{{route('exercise.destroy', $exercise)}}" method="post">
+                            @csrf
+                            @method("delete")
+                            <button class="btn btn-danger">Supprimer</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

@@ -41,7 +41,14 @@ class ExerciseController extends Controller
      */
     public function store(ExerciseRequest $request)
     {
-        Exercise::create($request->validated());
+        $exercise = Exercise::create($request->validated());
+
+        /** @var UploadedFile|null $image */
+        $image = $request->validated('image');
+        if ($image != null && !$image->getError()){
+            $data['image'] = $image->store('exercise', 'public');
+            $exercise->update($data);
+        }
 
         return to_route('exercise.index')->with('success', 'L\'exercice a bien été créé');
     }
@@ -72,6 +79,13 @@ class ExerciseController extends Controller
     public function update(ExerciseRequest $request, Exercise $exercise)
     {
         $exercise->update($request->validated());
+
+        /** @var UploadedFile|null $image */
+        $image = $request->validated('image');
+        if ($image != null && !$image->getError()){
+            $data['image'] = $image->store('exercise', 'public');
+            $exercise->update($data);
+        }
 
         return redirect()->route('exercise.show', ['exercise' => $exercise->id])->with('success', 'L\'exercice a bien été modifié');
     }

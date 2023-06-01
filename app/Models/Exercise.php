@@ -13,6 +13,12 @@ class Exercise extends Model
         'name',
         'description',
         'repetition',
-        'set'
+        'set',
+        'image',
+        'user_id'
     ];
+
+    public function user () {
+        return $this->belongsTo(User::class);
+    }
 }

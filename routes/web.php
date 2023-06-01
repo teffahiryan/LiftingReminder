@@ -31,14 +31,16 @@ Route::middleware('auth')->controller(\App\Http\Controllers\SessionController::c
     Route::get('/{session}/seance', 'show')->name('show');
     Route::post('/create/seance', 'store')->name('store');
     Route::post('{session}/edit', 'update')->name('update');
+    Route::post('{session}/editExercises', 'updateExercise')->name('updateExercise');
 });
 
 // **** USER EXERCISE ****
 
 Route::middleware('auth')->controller(\App\Http\Controllers\ExerciseController::class)->name('user.exercise.')->group(function () {
-    Route::get('/{exercice}/exercice', 'show')->name('show');
+    Route::get('/{exercise}/exercice', 'show')->name('show');
     Route::post('/create/exercice', 'store')->name('store');
-    Route::post('{exercice}/edit', 'update')->name('update');
+    Route::post('{exercise}/edit', 'update')->name('update');
+    Route::post('{exercise}/editRSW', 'updateRSW')->name('updateRSW');
 });
 
 // **** ADMIN SESSION/EXERCISE ****

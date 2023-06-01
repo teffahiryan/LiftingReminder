@@ -45,7 +45,14 @@ class SessionController extends Controller
      */
     public function store(SessionRequest $request)
     {
-        Session::create($request->validated());
+        $session = Session::create($request->validated());
+
+        /** @var UploadedFile|null $image */
+        $image = $request->validated('image');
+        if ($image != null && !$image->getError()){
+            $data['image'] = $image->store('session', 'public');
+            $session->update($data);
+        }
 
         return to_route('session.index')->with('success', 'La séance a bien été créé');
     }
@@ -76,6 +83,13 @@ class SessionController extends Controller
     public function update(SessionRequest $request, Session $session)
     {
         $session->update($request->validated());
+
+        /** @var UploadedFile|null $image */
+        $image = $request->validated('image');
+        if ($image != null && !$image->getError()){
+            $data['image'] = $image->store('session', 'public');
+            $session->update($data);
+        }
 
         return redirect()->route('session.show', ['session' => $session->id])->with('success', 'La séance a bien été modifié');
     }
