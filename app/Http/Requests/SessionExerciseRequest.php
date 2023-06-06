@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class SessionExerciseRequest extends FormRequest
@@ -22,7 +23,7 @@ class SessionExerciseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'exercises' => ['array', 'exists:exercises,id']
+            'exercises' => ['array', 'exists:exercises,id'],
         ];
     }
 }

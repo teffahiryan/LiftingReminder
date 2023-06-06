@@ -40,29 +40,6 @@ class ExerciseController extends Controller
         return redirect()->route('main.exercise.show', ['exercise' => $exercise->id])->with('success', 'L\'exercice a bien été modifié');
     }
 
-    public function updateRSW(Exercise $exercise, Request $request)
-    {
-
-        if(ifUser($exercise)){
-            if($request->repetition != null){
-                $exercise->update(['repetition' => $request->repetition]);
-            }elseif($request->set != null){
-                $exercise->update(['set' => $request->set]);
-            }
-            return redirect()->back();
-        }else{
-            return redirect()->route('dashboard');
-        }
-    }
 }
 
-function ifUser(Exercise $exercise)
-{
-    $user = Auth::user();
 
-    if ($exercise->user->id == $user->id) {
-        return true;
-    }else{
-        return false;
-    }
-}

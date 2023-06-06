@@ -22,7 +22,7 @@ class Session extends Model
     }
 
     public function exercises () {
-        return $this->belongsToMany(Exercise::class);
+        return $this->belongsToMany(Exercise::class)->withPivot('repetition', 'set', 'weight');
     }
 
     public function imageUrl (): string {

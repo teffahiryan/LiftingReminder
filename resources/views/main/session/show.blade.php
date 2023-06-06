@@ -19,28 +19,42 @@
                 <div class="d-flex flex-column">
                     <h6> Répétition </h6>
                     <div class="d-flex gap-3">
-                        @include('includes.formRSW', ['value' => $exercise->repetition - 1, 'sign' => '-', 'name' => 'repetition'])
+                        @include('includes.formRSW', ['value' => $exercise->pivot->repetition - 1, 'sign' => '-', 'name' => 'repetition'])
 
-                        <form action="{{route('user.exercise.updateRSW', $exercise->id)}}" method="post">
+                        <form action="{{route('user.session.updateRSW', [$session->id, $exercise->id])}}" method="post">
                             @csrf
-                            <input type="text" name="repetition" value="{{$exercise->repetition}}">
+                            <input type="text" name="repetition" value="{{$exercise->pivot->repetition}}">
                         </form>
 
-                        @include('includes.formRSW', ['value' => $exercise->repetition + 1, 'sign' => '+', 'name' => 'repetition'])
+                        @include('includes.formRSW', ['value' => $exercise->pivot->repetition + 1, 'sign' => '+', 'name' => 'repetition'])
                     </div>
                 </div>
 
                 <div class="d-flex flex-column">
                     <h6> Série </h6>
                     <div class="d-flex gap-3">
-                        @include('includes.formRSW', ['value' => $exercise->set - 1, 'sign' => '-', 'name' => 'set'])
+                        @include('includes.formRSW', ['value' => $exercise->pivot->set - 1, 'sign' => '-', 'name' => 'set'])
 
-                        <form action="{{route('user.exercise.updateRSW', $exercise->id)}}" method="post">
+                        <form action="{{route('user.session.updateRSW', [$session->id, $exercise->id])}}" method="post">
                             @csrf
-                            <input type="text" name="set" value="{{$exercise->set}}">
+                            <input type="text" name="set" value="{{$exercise->pivot->set}}">
                         </form>
 
-                        @include('includes.formRSW', ['value' => $exercise->set + 1, 'sign' => '+', 'name' => 'set'])
+                        @include('includes.formRSW', ['value' => $exercise->pivot->set + 1, 'sign' => '+', 'name' => 'set'])
+                    </div>
+                </div>
+
+                <div class="d-flex flex-column">
+                    <h6> Poids </h6>
+                    <div class="d-flex gap-3">
+                        @include('includes.formRSW', ['value' => floatval($exercise->pivot->weight) - 1, 'sign' => '-', 'name' => 'weight'])
+
+                        <form action="{{route('user.session.updateRSW', [$session->id, $exercise->id])}}" method="post">
+                            @csrf
+                            <input type="text" name="weight" value="{{$exercise->pivot->weight}}">
+                        </form>
+
+                        @include('includes.formRSW', ['value' => floatval($exercise->pivot->weight) + 1, 'sign' => '+', 'name' => 'weight'])
                     </div>
                 </div>
           </div>

@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ExerciseRequest extends FormRequest
+class FormRSWRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,18 +22,9 @@ class ExerciseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'min:2'],
-            'description' => ['required'],
-            'image' => ['image', 'max:2000'],
-            'user_id' => ['required']
+            'repetition' => ['nullable', 'int'],
+            'set' => ['nullable', 'int'],
+            'weight' => ['nullable', 'string', 'max:5'],
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'repetition' => 0,
-            'set' => 0
-        ]);
     }
 }
