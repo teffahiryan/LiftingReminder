@@ -28,7 +28,14 @@ class ExerciseController extends Controller
 
     public function store(ExerciseRequest $request)
     {
-        Exercise::create($request->validated());
+        $exercise = Exercise::create($request->validated());
+
+        /** @var UploadedFile|null $image */
+        $image = $request->validated('image');
+        if ($image != null && !$image->getError()){
+            $data['image'] = $image->store('exercise', 'public');
+            $exercise->update($data);
+        }
 
         return to_route('dashboard')->with('success', 'L\'exercice a bien été créé');
     }
@@ -37,7 +44,35 @@ class ExerciseController extends Controller
     {
         $exercise->update($request->validated());
 
-        return redirect()->route('main.exercise.show', ['exercise' => $exercise->id])->with('success', 'L\'exercice a bien été modifié');
+            /** @var UploadedFile|null $image */
+            $image = $request->validated('image');
+            if ($image != null && !$image->getError()){
+                $data['image'] = $image->store('exercise', 'public');
+                $exercise->update($data);
+            }
+
+        return redirect()->route('user.exercise.show', ['exercise' => $exercise->id])->with('success', 'L\'exercice a bien été modifié');
+    }
+
+    public function shared(Exercise $exercise)
+    {
+
+        Exercise::create([
+            'name' => $exercise->name,
+            'description' => $exercise->description,
+            'isShared' => 0,
+            'user_id' => Auth::user()->id,
+            'sharedCreator' => $exercise->user->name
+        ]);
+
+        return redirect()->route('dashboard')->with('success', 'L\'exercice a bien été ajouté a votre tableau de bord');
+    }
+
+    public function destroy(Exercise $exercise)
+    {
+        $exercise->delete();
+
+        return redirect()->route('dashboard')->with('success', 'L\'exercice a bien été supprimé');
     }
 
 }

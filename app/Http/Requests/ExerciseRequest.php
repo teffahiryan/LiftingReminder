@@ -26,15 +26,18 @@ class ExerciseRequest extends FormRequest
             'name' => ['required', 'min:2'],
             'description' => ['required'],
             'image' => ['image', 'max:2000'],
-            'user_id' => ['required']
+            'user_id' => ['required'],
+            'isShared' => ['boolean'],
+            'sharedCreator' => ['string']
         ];
     }
 
     protected function prepareForValidation()
     {
         $this->merge([
+            'user_id' => $this->input('user_id') ?: Auth::id(),
             'repetition' => 0,
-            'set' => 0
+            'set' => 0,
         ]);
     }
 }

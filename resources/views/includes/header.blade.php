@@ -1,21 +1,31 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
-  <div class="container-fluid">
+<nav class="navbar navbar-dark navbar-expand-lg bg-primary mb-3">
+  <div class="container-fluid px-5">
+
     <a class="navbar-brand" href="/"> <i class="fas fa-dumbbell" style="color: #ffffff;"></i> Lifting Reminder </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+
+    <div class="navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav d-flex justify-content-between w-100 mx-3">
 
-        <li class="nav-item">
+        <div class="d-flex align-items-center gap-3 ms-5">
           @auth
-          <a class="nav-link active" aria-current="page" href="{{route('dashboard')}}">Tableau de bord</a>
+            <li class="nav-item">
+              <a class="nav-link p-0 active" aria-current="page" href="{{route('dashboard')}}">Tableau de bord</a>
+            </li>
+
+            <div class="header-separator rounded bg-light"></div>
+
+            <li class="nav-item">
+              <a class="nav-link p-0 active" aria-current="page" href="{{route('shared')}}">Communauté</a>
+            </li>
           @endauth
-        </li>
+        </div>
 
         @auth
           <li class="nav-item dropstart">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{Auth::user()->name}}
             </a>
             <ul class="dropdown-menu">
@@ -36,7 +46,8 @@
             <a class="nav-link active" aria-current="page" href="{{route('login')}}">Connexion</a>
           </li>
         @endguest
-
+      </ul>
     </div>
   </div>
 </nav>
+

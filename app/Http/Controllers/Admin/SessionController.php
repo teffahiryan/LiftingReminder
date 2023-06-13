@@ -45,7 +45,7 @@ class SessionController extends Controller
      */
     public function store(SessionRequest $request)
     {
-        $session = Session::create($request->validated());
+        $session = Session::create($request->validated()); 
 
         /** @var UploadedFile|null $image */
         $image = $request->validated('image');

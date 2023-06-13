@@ -58,12 +58,21 @@ class SessionController extends Controller
                 $session->update($data);
             }
 
-            return redirect()->route('main.session.show', ['session' => $session->id])->with('success', 'La séance a bien été modifié');
+            return redirect()->route('user.session.show', ['session' => $session->id])->with('success', 'La séance a bien été modifié');
 
         }else{
             return redirect()->route('dashboard');
         }
     }
+
+    public function destroy(Session $session)
+    {
+        $session->delete();
+
+        return redirect()->route('dashboard')->with('success', 'La séance a bien été supprimé');
+    }
+
+    // ADDITIONALS
 
     public function updateExercise(SessionExerciseRequest $request, Session $session)
     {
