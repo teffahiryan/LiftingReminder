@@ -44,9 +44,9 @@
         <i class="fas fa-plus" style="color: #ffffff;"></i> (Dé)Sélectionner un exercice
     </button>
 
-    <button class="btn btn-info m-3" data-bs-toggle="modal" data-bs-target="#exercisesessionModal"> 
+    {{-- <button class="btn btn-info m-3" data-bs-toggle="modal" data-bs-target="#exercisesessionModal"> 
         <i class="fas fa-plus" style="color: #ffffff;"></i> Créer un exercice
-    </button>
+    </button> --}}
 
 </div>
 
