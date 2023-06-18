@@ -24,7 +24,7 @@
                 </button>
               </li>
               <li>
-                <form action="{{route('user.session.delete', ['session' => $session])}}" method="post">
+                <form action="{{route('user.session.destroy', ['session' => $session])}}" method="post">
                     @csrf
                     @method("delete")
                     <button class="dropdown-item"> <i class="fas fa-trash-alt"></i> Supprimer </button>

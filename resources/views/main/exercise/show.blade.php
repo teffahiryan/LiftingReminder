@@ -24,7 +24,7 @@
               </button>
             </li>
             <li>
-              <form action="{{route('user.exercise.delete', ['exercise' => $exercise])}}" method="post">
+              <form action="{{route('user.exercise.destroy', ['exercise' => $exercise])}}" method="post">
                   @csrf
                   @method("delete")
                   <button class="dropdown-item"> <i class="fas fa-trash-alt"></i> Supprimer </button>

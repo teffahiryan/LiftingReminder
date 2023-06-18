@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\SessionRequest;
 use App\Models\Exercise;
-use App\Models\Tips;
+use App\Models\Tip;
 
 class MainController extends Controller
 {
@@ -21,7 +21,7 @@ class MainController extends Controller
             'exercises' => $user->exercises,
             'session' => new Session(),
             'exercise' => new Exercise(),
-            'tips' => Tips::inRandomOrder()->first()
+            'tips' => Tip::inRandomOrder()->first()
         ]);
     }
 

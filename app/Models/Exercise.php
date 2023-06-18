@@ -10,16 +10,7 @@ class Exercise extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name',
-        'description',
-        'repetition',
-        'set',
-        'image',
-        'user_id',
-        'isShared',
-        'sharedCreator'
-    ];
+    protected $guarded = [];
 
     public function user () {
         return $this->belongsTo(User::class);

@@ -20,44 +20,47 @@ Route::get('/', function () {
     return view('index');
 });
 
-// **** USER ****
+Route::middleware('auth')->group(function () { 
 
-Route::get('/tableau-de-bord', [MainController::class, 'dashboard'])->name('dashboard')->middleware('auth');
-Route::post('/tableau-de-bord', [MainController::class, 'store'])->middleware('auth');
+    // **** USER ****
 
-Route::get('/communaute', [MainController::class, 'shared'])->name('shared')->middleware('auth');
-Route::get('/{exercise}/exercice-communaute', [MainController::class, 'showShared'])->name('shared.show');
+    Route::get('/tableau-de-bord', [MainController::class, 'dashboard'])->name('dashboard');
+    Route::post('/tableau-de-bord', [MainController::class, 'store']);
 
-// **** USER SESSION ****
+    Route::get('/communaute', [MainController::class, 'shared'])->name('shared');
+    Route::get('/{exercise}/exercice-communaute', [MainController::class, 'showShared'])->name('shared.show');
 
-Route::middleware('auth')->controller(\App\Http\Controllers\SessionController::class)->name('user.session.')->group(function () {
-    Route::get('/{session}/seance', 'show')->name('show');
-    Route::post('/create/seance', 'store')->name('store');
+    Route::name('user.')->group(function () { 
 
-    Route::put('{session}/session/edit', 'update')->name('update');
-    Route::post('{session}/editExercises', 'updateExercise')->name('updateExercise');
+        // **** USER SESSION ****
 
-    Route::post('{session}/{exercise}/editRSW', 'updateRSW')->name('updateRSW');
-    Route::delete('{session}/session/delete', 'destroy')->name('delete');
-});
+        Route::controller(\App\Http\Controllers\SessionController::class)->group(function () {
+            Route::resource('session', \App\Http\Controllers\SessionController::class)->except(['index', 'create', 'edit']);
+            // ADDITIONALS
+            Route::post('{session}/editExercises', 'updateExercise')->name('session.updateExercise');
+            Route::post('{session}/{exercise}/editRSW', 'updateRSW')->name('session.updateRSW');
+        });
 
-// **** USER EXERCISE ****
+        // **** USER EXERCISE ****
 
-Route::middleware('auth')->controller(\App\Http\Controllers\ExerciseController::class)->name('user.exercise.')->group(function () {
-    Route::get('/{exercise}/exercice', 'show')->name('show');
-    Route::post('/create/exercice', 'store')->name('store');
+        Route::controller(\App\Http\Controllers\ExerciseController::class)->group(function () {
+            Route::resource('exercise', \App\Http\Controllers\ExerciseController::class)->except(['index', 'create', 'edit']);
+            // ADDITIONALS
+            Route::get('{exercise}/copy', 'exercise.shared')->name('copy');
+        });
 
-    Route::put('{exercise}/exercise/edit', 'update')->name('update');
+    });
+
     
-    Route::get('{exercise}/copy', 'shared')->name('copy');
-    Route::delete('{exercise}/exercise/delete', 'destroy')->name('delete');
+    // **** ADMIN SESSION/EXERCISE/TIPS ****
+
+    Route::name('admin.')->group(function (){ 
+        Route::resource('admin/session', \App\Http\Controllers\Admin\SessionController::class);
+        Route::resource('admin/exercise', \App\Http\Controllers\Admin\ExerciseController::class);
+        Route::resource('admin/tips', \App\Http\Controllers\Admin\TipController::class);
+    });
+
 });
-
-// **** ADMIN SESSION/EXERCISE/TIPS ****
-
-Route::resource('session', \App\Http\Controllers\Admin\SessionController::class)->middleware('auth');
-Route::resource('exercise', \App\Http\Controllers\Admin\ExerciseController::class)->middleware('auth');
-Route::resource('tips', \App\Http\Controllers\Admin\TipController::class)->middleware('auth');
 
 // **** AUTH ****
 
