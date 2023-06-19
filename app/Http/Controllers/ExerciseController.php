@@ -19,15 +19,9 @@ class ExerciseController extends Controller
 
     public function show(Exercise $exercise) {
 
-        $user = Auth::user();
-
-        if($exercise->user->id == $user->id){
-            return view('main.exercise.show', [
-                'exercise' => $exercise
-            ]);
-        }else{
-            return to_route('dashboard')->with('success', ' L\'exercice est introuvable');
-        }
+        return view('main.exercise.show', [
+            'exercise' => $exercise
+        ]);
 
     }
 
@@ -61,7 +55,6 @@ class ExerciseController extends Controller
 
     public function shared(Exercise $exercise)
     {
-
         Exercise::create([
             'name' => $exercise->name,
             'description' => $exercise->description,

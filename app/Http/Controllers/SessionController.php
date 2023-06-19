@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FormRSWRequest;
 use App\Http\Requests\SessionExerciseRequest;
 use App\Models\Session;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\SessionRequest;
 use App\Models\Exercise;
@@ -71,7 +70,6 @@ class SessionController extends Controller
 
     public function updateExercise(SessionExerciseRequest $request, Session $session)
     {
-
         $exercisesIds = $session->exercises()->pluck('id');
 
         for($i = 0; $i <= count($request->exercises) - 1 ; $i++){
@@ -91,12 +89,10 @@ class SessionController extends Controller
 
         $session->exercises()->sync($exercise_id_array);
         return redirect()->back()->with('success', 'Les exercices ont bien été mise à jour.');
-
     }
 
     public function updateRSW(Session $session, Exercise $exercise, FormRSWRequest $request)
     {
-
         // Je récupère tout les exercises
         $exercises = $session->exercises()->get();
 
@@ -128,7 +124,6 @@ class SessionController extends Controller
         // Sync totale
         $session->exercises()->sync($exercise_id_array);
         return redirect()->back();
-        
     }
 
 }
