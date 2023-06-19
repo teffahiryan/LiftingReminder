@@ -10,6 +10,7 @@ use App\Http\Requests\SessionRequest;
 
 class SessionController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -54,7 +55,7 @@ class SessionController extends Controller
             $session->update($data);
         }
 
-        return to_route('session.index')->with('success', 'La séance a bien été créé');
+        return to_route('admin.session.index')->with('success', 'La séance a bien été créé');
     }
 
     /**
@@ -91,7 +92,7 @@ class SessionController extends Controller
             $session->update($data);
         }
 
-        return redirect()->route('session.show', ['session' => $session->id])->with('success', 'La séance a bien été modifié');
+        return redirect()->route('admin.session.show', ['session' => $session->id])->with('success', 'La séance a bien été modifié');
     }
 
     /**
@@ -101,6 +102,6 @@ class SessionController extends Controller
     {
         $session->delete();
 
-        return redirect()->route('session.index')->with('success', 'La séance a bien été supprimé');
+        return redirect()->route('admin.session.index')->with('success', 'La séance a bien été supprimé');
     }
 }

@@ -6,7 +6,7 @@
 
     <h1>@yield('title')</h1>
 
-    <form class="vstack gap-2" action="{{route($exercise->exists ? 'exercise.update' : 'exercise.store', $exercise )}}" method="post">
+    <form class="vstack gap-2" action="{{route($exercise->exists ? 'admin.exercise.update' : 'admin.exercise.store', $exercise )}}" method="post">
         
         @csrf
         @method($exercise->exists ? 'put' : 'post')

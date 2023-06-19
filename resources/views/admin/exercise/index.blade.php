@@ -6,7 +6,7 @@
     
     <h1> Exercice </h1>
 
-    <a href="{{route('exercise.create')}}" class="btn btn-primary">Créer</a>
+    <a href="{{route('admin.exercise.create')}}" class="btn btn-primary">Créer</a>
 
     <table class="table table-striped">
         <thead>
@@ -24,9 +24,9 @@
                     <td> {{$exercise->set}} </td>
                     <td> {{$exercise->repetition}} </td>
                     <td class="d-flex gap-2">
-                        <a href="{{route('exercise.show', $exercise)}}" class="btn btn-primary">Voir</a>
-                        <a href="{{route('exercise.edit', $exercise)}}" class="btn btn-primary">Modifier</a>
-                        <form action="{{route('exercise.destroy', $exercise)}}" method="post">
+                        <a href="{{route('admin.exercise.show', $exercise)}}" class="btn btn-primary">Voir</a>
+                        <a href="{{route('admin.exercise.edit', $exercise)}}" class="btn btn-primary">Modifier</a>
+                        <form action="{{route('admin.exercise.destroy', $exercise)}}" method="post">
                             @csrf
                             @method("delete")
                             <button class="btn btn-danger">Supprimer</button>

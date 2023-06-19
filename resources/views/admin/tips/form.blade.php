@@ -6,7 +6,7 @@
 
     <h1>@yield('title')</h1>
 
-    <form class="vstack gap-2" action="{{route($tip->exists ? 'tips.update' : 'tips.store', $tip )}}" method="post" enctype="multipart/form-data">
+    <form class="vstack gap-2" action="{{route($tip->exists ? 'admin.tips.update' : 'admin.tips.store', $tip )}}" method="post" enctype="multipart/form-data">
         
         @csrf
         @method($tip->exists ? 'put' : 'post')

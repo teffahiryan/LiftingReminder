@@ -15,7 +15,12 @@ class SessionSeeder extends Seeder
     public function run(): void
     {
         Session::factory(20)
-        ->hasAttached(Exercise::factory()->count(rand(1, 4)), ['repetition' => rand(0, 12), 'set' => rand(0, 4), 'weight' => rand(0, 100)])
+        ->hasAttached(Exercise::factory()->count(rand(1, 4)), 
+            [
+                'repetition' => rand(0, 12), 
+                'set' => rand(0, 4), 
+                'weight' => rand(0, 100),
+            ])
         ->create();
     }
 }

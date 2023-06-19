@@ -6,7 +6,7 @@
 
     <h1>@yield('title')</h1>
 
-    <form class="vstack gap-2" action="{{route($session->exists ? 'session.update' : 'session.store', $session )}}" method="post" enctype="multipart/form-data">
+    <form class="vstack gap-2" action="{{route($session->exists ? 'admin.session.update' : 'admin.session.store', $session )}}" method="post" enctype="multipart/form-data">
         
         @csrf
         @method($session->exists ? 'put' : 'post')

@@ -11,7 +11,12 @@ use Illuminate\Support\Facades\Validator;
 
 class ExerciseController extends Controller
 {
-        
+
+    public function __construct()
+    {   
+        $this->authorizeResource(Exercise::class, 'exercise');
+    }
+
     public function show(Exercise $exercise) {
 
         $user = Auth::user();

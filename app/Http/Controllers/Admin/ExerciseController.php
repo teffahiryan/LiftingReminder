@@ -10,6 +10,7 @@ use App\Http\Requests\ExerciseRequest;
 
 class ExerciseController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -50,7 +51,7 @@ class ExerciseController extends Controller
             $exercise->update($data);
         }
 
-        return to_route('exercise.index')->with('success', 'L\'exercice a bien été créé');
+        return to_route('admin.exercise.index')->with('success', 'L\'exercice a bien été créé');
     }
 
     /**
@@ -87,7 +88,7 @@ class ExerciseController extends Controller
             $exercise->update($data);
         }
 
-        return redirect()->route('exercise.show', ['exercise' => $exercise->id])->with('success', 'L\'exercice a bien été modifié');
+        return redirect()->route('admin.exercise.show', ['exercise' => $exercise->id])->with('success', 'L\'exercice a bien été modifié');
     }
 
     /**
@@ -97,6 +98,6 @@ class ExerciseController extends Controller
     {
         $exercise->delete();
 
-        return redirect()->route('exercise.index')->with('success', 'L\'exercice a bien été supprimé');
+        return redirect()->route('admin.exercise.index')->with('success', 'L\'exercice a bien été supprimé');
     }
 }

@@ -3,18 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\TipsRequest;
-use App\Models\Tips;
+use App\Models\Tip;
 use Illuminate\Routing\Controller;
-use Illuminate\Http\Request;
 
 class TipController extends Controller
 {
-        /**
+
+    /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $tips = Tips::all();
+        $tips = Tip::all();
 
         return view('admin.tips.index', [
             'tips' => $tips
@@ -26,7 +26,7 @@ class TipController extends Controller
      */
     public function create()
     {
-        $tip = new Tips();
+        $tip = new Tip();
 
         return view('admin.tips.form', [
             'tip' => $tip
@@ -38,15 +38,15 @@ class TipController extends Controller
      */
     public function store(TipsRequest $request)
     {
-        $tip = Tips::create($request->validated());
+        $tip = Tip::create($request->validated());
 
-        return to_route('tips.index')->with('success', 'Le conseil a bien été créé');
+        return to_route('admin.tips.index')->with('success', 'Le conseil a bien été créé');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Tips $tip)
+    public function show(Tip $tip)
     {
         return view('admin.tips.show', [
             'exercise' => $tip
@@ -56,7 +56,7 @@ class TipController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Tips $tip)
+    public function edit(Tip $tip)
     {
         return view('admin.tips.form', [
             'exercise' => $tip
@@ -66,20 +66,20 @@ class TipController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TipsRequest $request, Tips $tip)
+    public function update(TipsRequest $request, Tip $tip)
     {
         $tip->update($request->validated());
 
-        return redirect()->route('tips.show', ['tip' => $tip->id])->with('success', 'Le conseil a bien été modifié');
+        return redirect()->route('admin.tips.show', ['tip' => $tip->id])->with('success', 'Le conseil a bien été modifié');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tips $tip)
+    public function destroy(Tip $tip)
     {
         $tip->delete();
 
-        return redirect()->route('tips.index')->with('success', 'Le conseil a bien été supprimé');
+        return redirect()->route('admin.tips.index')->with('success', 'Le conseil a bien été supprimé');
     }
 }

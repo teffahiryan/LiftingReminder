@@ -23,7 +23,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () { 
 
     // **** USER ****
-
+ 
     Route::get('/tableau-de-bord', [MainController::class, 'dashboard'])->name('dashboard');
     Route::post('/tableau-de-bord', [MainController::class, 'store']);
 
@@ -46,21 +46,21 @@ Route::middleware('auth')->group(function () {
         Route::controller(\App\Http\Controllers\ExerciseController::class)->group(function () {
             Route::resource('exercise', \App\Http\Controllers\ExerciseController::class)->except(['index', 'create', 'edit']);
             // ADDITIONALS
-            Route::get('{exercise}/copy', 'exercise.shared')->name('copy');
+            Route::get('{exercise}/copy', 'exercise.shared')->name('exercise.copy');
         });
 
     });
 
-    
-    // **** ADMIN SESSION/EXERCISE/TIPS ****
-
-    Route::name('admin.')->group(function (){ 
-        Route::resource('admin/session', \App\Http\Controllers\Admin\SessionController::class);
-        Route::resource('admin/exercise', \App\Http\Controllers\Admin\ExerciseController::class);
-        Route::resource('admin/tips', \App\Http\Controllers\Admin\TipController::class);
-    });
-
 });
+
+// **** ADMIN SESSION/EXERCISE/TIPS ****
+
+Route::name('admin.')->middleware('admin')->group(function (){ 
+    Route::resource('admin/session', \App\Http\Controllers\Admin\SessionController::class);
+    Route::resource('admin/exercise', \App\Http\Controllers\Admin\ExerciseController::class);
+    Route::resource('admin/tips', \App\Http\Controllers\Admin\TipController::class);
+});
+
 
 // **** AUTH ****
 
