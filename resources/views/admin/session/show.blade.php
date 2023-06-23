@@ -1,4 +1,4 @@
-@extends('base')
+@extends('admin.base')
 @section('title', 'Séance')
 @section('content')
     <h1> Séance {{$session->name}} </h1>

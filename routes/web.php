@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
@@ -56,9 +57,10 @@ Route::middleware('auth')->group(function () {
 // **** ADMIN SESSION/EXERCISE/TIPS ****
 
 Route::name('admin.')->middleware('admin')->group(function (){ 
+    Route::get('admin', [AdminController::class, 'index'])->name('index');
     Route::resource('admin/session', \App\Http\Controllers\Admin\SessionController::class);
     Route::resource('admin/exercise', \App\Http\Controllers\Admin\ExerciseController::class);
-    Route::resource('admin/tips', \App\Http\Controllers\Admin\TipController::class);
+    Route::resource('admin/tip', \App\Http\Controllers\Admin\TipController::class);
 });
 
 

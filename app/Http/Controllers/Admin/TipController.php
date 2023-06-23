@@ -40,7 +40,7 @@ class TipController extends Controller
     {
         $tip = Tip::create($request->validated());
 
-        return to_route('admin.tips.index')->with('success', 'Le conseil a bien été créé');
+        return to_route('admin.tip.index')->with('success', 'Le conseil a bien été créé');
     }
 
     /**
@@ -49,7 +49,7 @@ class TipController extends Controller
     public function show(Tip $tip)
     {
         return view('admin.tips.show', [
-            'exercise' => $tip
+            'tip' => $tip
         ]);
     }
 
@@ -58,8 +58,9 @@ class TipController extends Controller
      */
     public function edit(Tip $tip)
     {
+
         return view('admin.tips.form', [
-            'exercise' => $tip
+            'tip' => $tip
         ]);
     }
 
@@ -70,7 +71,7 @@ class TipController extends Controller
     {
         $tip->update($request->validated());
 
-        return redirect()->route('admin.tips.show', ['tip' => $tip->id])->with('success', 'Le conseil a bien été modifié');
+        return redirect()->route('admin.tip.index')->with('success', 'Le conseil a bien été modifié');
     }
 
     /**
@@ -80,6 +81,6 @@ class TipController extends Controller
     {
         $tip->delete();
 
-        return redirect()->route('admin.tips.index')->with('success', 'Le conseil a bien été supprimé');
+        return redirect()->route('admin.tip.index')->with('success', 'Le conseil a bien été supprimé');
     }
 }

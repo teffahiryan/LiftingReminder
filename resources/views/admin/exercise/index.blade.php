@@ -1,4 +1,4 @@
-@extends('base')
+@extends('admin.base')
 
 @section('title', 'Exercice')
 
@@ -12,8 +12,6 @@
         <thead>
             <th>Nom</th>
             <th>Description</th>
-            <th>Série</th>
-            <th>Répétition</th>
             <th>Actions</th>
         </thead>
         <tbody>
@@ -21,8 +19,6 @@
                 <tr>
                     <td> {{$exercise->name}} </td>
                     <td> {{$exercise->description}} </td>
-                    <td> {{$exercise->set}} </td>
-                    <td> {{$exercise->repetition}} </td>
                     <td class="d-flex gap-2">
                         <a href="{{route('admin.exercise.show', $exercise)}}" class="btn btn-primary">Voir</a>
                         <a href="{{route('admin.exercise.edit', $exercise)}}" class="btn btn-primary">Modifier</a>

@@ -1,4 +1,4 @@
-@extends('base')
+@extends('admin.base')
 
 @section('title', $session->exists ? "Editer une séance" : "Créer une séance")
 

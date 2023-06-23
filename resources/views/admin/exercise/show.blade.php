@@ -1,4 +1,4 @@
-@extends('base')
+@extends('admin.base')
 @section('title', 'Exercice')
 @section('content')
     <h1> Exercice {{$exercise->name}} </h1>

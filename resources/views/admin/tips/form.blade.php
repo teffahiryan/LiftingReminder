@@ -1,4 +1,4 @@
-@extends('base')
+@extends('admin.base')
 
 @section('title', $tip->exists ? "Editer une séance" : "Créer une séance")
 
@@ -6,7 +6,7 @@
 
     <h1>@yield('title')</h1>
 
-    <form class="vstack gap-2" action="{{route($tip->exists ? 'admin.tips.update' : 'admin.tips.store', $tip )}}" method="post" enctype="multipart/form-data">
+    <form class="vstack gap-2" action="{{route($tip->exists ? 'admin.tip.update' : 'admin.tip.store', $tip )}}" method="post" enctype="multipart/form-data">
         
         @csrf
         @method($tip->exists ? 'put' : 'post')

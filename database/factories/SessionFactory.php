@@ -20,7 +20,6 @@ class SessionFactory extends Factory
         return [
             'name' => $this->faker->word(2),
             'description' => $this->faker->sentences(3, true),
-            'user_id' => User::all()->random()->id,
         ];
     }
 }

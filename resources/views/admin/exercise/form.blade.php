@@ -1,4 +1,4 @@
-@extends('base')
+@extends('admin.base')
 
 @section('title', $exercise->exists ? "Editer un exercice" : "Créer un exercice")
 
